@@ -1,70 +1,214 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+---
 
-## Available Scripts
+# **Fashion Recommendation System**
 
-In the project directory, you can run:
+This project is a fashion recommendation system where users upload photos, and the system automatically compares the hair, skin, and eye color of the uploaded photo with pre-stored reference photos. Based on the closest match, the system suggests products that were used by the person in the reference photo.
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## **Table of Contents**
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. [Requirements](#requirements)
+2. [Backend Setup (FastAPI)](#1-setting-up-the-backend-fastapi)
+   - [Step 1: Create a Virtual Environment](#step-1-create-a-virtual-environment-optional-but-recommended)
+   - [Step 2: Install Backend Dependencies](#step-2-install-backend-dependencies)
+   - [Step 3: Run the FastAPI Backend](#step-3-run-the-fastapi-backend)
+3. [Frontend Setup (React)](#2-setting-up-the-frontend-react)
+   - [Step 1: Install Frontend Dependencies](#step-1-install-frontend-dependencies)
+   - [Step 2: Start the React Frontend](#step-2-start-the-react-frontend)
+4. [How to Use the Project](#3-how-to-use-the-project)
+5. [Project Directory Structure](#project-directory-structure)
+6. [Key Commands](#4-key-commands)
+7. [Additional Tips](#5-additional-tips)
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## **Requirements**
 
-### `npm run build`
+Before getting started, ensure you have the following installed:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. **Python 3.8+** (for the FastAPI backend)
+2. **Node.js** (for the React frontend)
+3. **pip** (Python package manager)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## **1. Setting Up the Backend (FastAPI)**
 
-### `npm run eject`
+The backend uses **FastAPI** to handle file uploads, image processing, and comparison with pre-uploaded reference images.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### **Step 1: Create a Virtual Environment (Optional but Recommended)**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+A virtual environment keeps your project dependencies isolated from your global Python installation.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+**For Windows**:
+```bash
+python -m venv venv
+venv\Scripts\activate
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+**For macOS/Linux**:
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
 
-## Learn More
+### **Step 2: Install Backend Dependencies**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+After activating the virtual environment, install the necessary packages for the backend.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+pip install fastapi uvicorn python-multipart Pillow scikit-learn
+```
 
-### Code Splitting
+### **Step 3: Run the FastAPI Backend**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Navigate to the `backend/` folder (where the `main.py` file is located) and run the FastAPI server using Uvicorn:
 
-### Analyzing the Bundle Size
+```bash
+cd backend
+uvicorn main:app --reload
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+The backend should now be running at `http://127.0.0.1:8000`.
 
-### Making a Progressive Web App
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## **2. Setting Up the Frontend (React)**
 
-### Advanced Configuration
+The frontend is built with **React** and allows users to upload images, which are then sent to the backend for processing.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### **Step 1: Install Frontend Dependencies**
 
-### Deployment
+Navigate to the `react-frontend/` folder and install the required dependencies:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```bash
+cd react-frontend
+npm install
+```
 
-### `npm run build` fails to minify
+This will install all the required packages as listed in the `package.json` file.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### **Step 2: Start the React Frontend**
+
+Once the dependencies are installed, start the development server:
+
+```bash
+npm start
+```
+
+The React app should now be running at `http://localhost:3000`.
+
+---
+
+## **3. How to Use the Project**
+
+1. **Access the React Frontend**:
+   - Open your browser and go to `http://localhost:3000`.
+   
+2. **Upload an Image**:
+   - On the main page, use the file upload form to upload an image.
+   - Click "Upload" to submit the image.
+
+3. **Receive Suggestions**:
+   - After uploading, the backend will process the image and compare it with pre-existing reference images.
+   - You will receive product recommendations based on the closest matching reference image.
+
+---
+
+## **Project Directory Structure**
+
+Here is a general overview of the project structure:
+
+```
+project_root/
+│
+├── backend/                      # FastAPI backend folder
+│   ├── __pycache__/              # Python cache files
+│   ├── main.py                   # Main FastAPI app
+│   └── reference_images/         # Reference images for comparison
+│
+├── react-frontend/               # React frontend folder
+│   ├── node_modules/             # Node.js modules
+│   ├── public/                   # Public assets for React
+│   ├── src/                      # Source code for React frontend
+│   ├── package.json              # Frontend dependencies
+│   ├── package-lock.json         # Lockfile for dependencies
+│   └── README.md                 # Frontend readme
+│
+└── README.md                     # Overall project readme
+```
+
+---
+
+## **4. Key Commands**
+
+### **Backend Commands**:
+- **Install Backend Dependencies**:
+  ```bash
+  pip install fastapi uvicorn python-multipart Pillow scikit-learn
+  ```
+
+- **Run the Backend**:
+  ```bash
+  uvicorn main:app --reload
+  ```
+
+### **Frontend Commands**:
+- **Install Frontend Dependencies**:
+  ```bash
+  npm install
+  ```
+
+- **Run the Frontend**:
+  ```bash
+  npm start
+  ```
+
+---
+
+## **5. Additional Tips**
+
+- **Backend**: If you add new Python libraries in the future, make sure to update the backend's `requirements.txt` using:
+  ```bash
+  pip freeze > requirements.txt
+  ```
+
+- **Frontend**: If you encounter any issues with the frontend dependencies, try deleting the `node_modules/` folder and `package-lock.json` file, then run `npm install` again.
+
+---
+
+This guide should help anyone get the project up and running smoothly. Let me know if you need additional clarifications!
+
+--- 
+
+### **How to Add This README to GitHub:**
+
+1. Add this file (`README.md`) to the root of your project directory.
+2. If your project is not already on GitHub, follow these steps:
+   - Initialize a Git repository:
+     ```bash
+     git init
+     ```
+   - Add files and commit:
+     ```bash
+     git add .
+     git commit -m "Initial commit with README"
+     ```
+   - Push to GitHub:
+     ```bash
+     git remote add origin <your-repo-url>
+     git push -u origin master
+     ```
+
+3. If your project is already on GitHub, simply commit and push the `README.md` file:
+   ```bash
+   git add README.md
+   git commit -m "Add project README"
+   git push
+   ```
+
+This will display the `README.md` file on your project's GitHub page!
+
+Let me know if you need any further adjustments!
